@@ -43,7 +43,7 @@
 		<p class='text-sm font-semibold'>
 		{time.created_at.toLocaleString()}
 		</p>
-		<Clock class='text-center font-bold' startTime={time.created_at} endTime={time.ended_at}/>
+		<Clock class='text-center font-bold' startTime={time.created_at } endTime={time.ended_at}/>
 		<p class='text-ellipsis'>
 		{time.chore}
 		</p>
