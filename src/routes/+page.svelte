@@ -62,7 +62,7 @@
 		let start = currentTimer.created_at;
 		const { data, error } = await $supabase
 			.from('timer')
-			.update({ user: user, chore: text, ended_at: addHours(start, hours) })
+			.update({ user: user, chore: text, ended_at: addHours(start, hours), diplomarbeit })
 			.eq('id', currentTimer.id);
 
 		currentTimer = null;
@@ -77,30 +77,12 @@
 
 		currentTimer = null;
 	}
-	async function stopTimerWithStartAndEndTime(
-		user: string,
-		text: string,
-		startTime: string,
-		endTime: string
-	) {
-		const { data, error } = await $supabase
-			.from('timer')
-			.insert({
-				user: user,
-				chore: text,
-				created_at: new Date(startTime),
-				ended_at: new Date(endTime)
-			})
-			.eq('id', currentTimer.id);
-
-		currentTimer = null;
-	}
 
 	let now = new Date();
 
 	let text;
 	let hours;
-	let diplomarbeit;
+	let diplomarbeit = false;
 </script>
 
 <div class="flex items-center justify-center w-full h-full relative">
@@ -114,7 +96,7 @@
 						method='get'
 						action='/history'
 						on:submit={() => {
-							if (hours) {
+							if (hours && typeof hours == 'number') {
 								stopTimerWithHours($user, text, hours);
 							} else {
 								stopTimer($user, text);
