@@ -60,6 +60,7 @@
 		<ul class="flex font-semibold text-sm">
 			<li class="p-2 hover:bg-sky-300 duration-200"><a href="/">Eintrag</a></li>
 			<li class="p-2 hover:bg-sky-300 duration-200"><a href="/history">History</a></li>
+			<li class="p-2 hover:bg-sky-300 duration-200"><a href="/start-end">Datum Eintrag</a></li>
 		</ul>
 		<div class='font-bold h-full justify-center items-center flex px-2'>
 			{#if $user}
@@ -68,7 +69,7 @@
 		</div>
 	</nav>
 	<div class="flex-auto">
-		<div class="inset-0 m-0">
+		<div class="w-full h-full">
 			{#if $user}
 				<slot />
 			{:else}

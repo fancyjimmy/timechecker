@@ -48,11 +48,20 @@
 </script>
 
 <div class="p-3">
-	<div class="flex font-bold gap-3 text-4xl">
-		<p>Gesamte Zeit</p>
-		<Clock startTime={new Date(null)} endTime={new Date(totalTime)} />
+	<div class="flex font-bold gap-3 text-4xl justify-between">
+		<div class='flex gap-3'>
+			<p>Gesamte Zeit</p>
+			<Clock startTime={new Date(null)} endTime={new Date(totalTime)} />
+		</div>
+		<div>
+			<select bind:value={state} class="select text-lg">
+				<option value="Diplomarbeit">Diplomarbeit</option>
+				<option value="Projekt">Projekt</option>
+				<option value="Beides">Beides</option>
+			</select>
+		</div>
 	</div>
-	<div>
+	<div class="flex flex-col gap-5 mt-3">
 		{#each filteredTimes as time}
 			{#if time.ended_at !== null}
 				<div class="p-2 bg-white rounded-xl border-2 border-black cool">
@@ -73,9 +82,8 @@
 	</div>
 </div>
 
-
 <style>
-	.cool{
-			box-shadow: -10px 10px 0 black;
+	.cool {
+		box-shadow: -10px 10px 0 black;
 	}
 </style>
