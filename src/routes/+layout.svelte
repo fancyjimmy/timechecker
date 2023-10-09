@@ -68,8 +68,8 @@
 			{/if}
 		</div>
 	</nav>
-	<div class="flex-auto">
-		<div class="w-full h-full">
+	<div class="flex-auto relative">
+		<div class="absolute inset-0 m-0 overflow-y-auto">
 			{#if $user}
 				<slot />
 			{:else}

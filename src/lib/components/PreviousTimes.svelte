@@ -47,7 +47,7 @@
 	let state: 'Diplomarbeit' | 'Projekt' | 'Beides' = 'Beides';
 </script>
 
-<div class="p-3">
+<div class="p-3 overflow-y-auto">
 	<div class="flex font-bold gap-3 text-4xl justify-between">
 		<div class='flex gap-3'>
 			<p>Gesamte Zeit</p>
@@ -61,7 +61,7 @@
 			</select>
 		</div>
 	</div>
-	<div class="flex flex-col gap-5 mt-3">
+	<div class="flex flex-col gap-5 mt-3 overflow-y-auto p-3">
 		{#each filteredTimes as time}
 			{#if time.ended_at !== null}
 				<div class="p-2 bg-white rounded-xl border-2 border-black cool">

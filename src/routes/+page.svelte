@@ -114,6 +114,7 @@
 							type="text"
 							class="input p-2"
 							bind:value={text}
+							required
 							placeholder="Was hast du gemacht?"
 						/>
 						<label class="grid grid-cols-2 items-center mt-3">
