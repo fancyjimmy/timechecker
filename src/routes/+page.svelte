@@ -92,6 +92,16 @@
 		currentTimer = null;
 	}
 
+	async function stopTimerWithHours(user: string, text: string, hours: number) {
+		let start = currentTimer.created_at;
+		const { data, error } = await $supabase
+			.from('timer')
+			.update({ user: user, chore: text, ended_at: addHours(start, hours) })
+			.eq('id', currentTimer.id);
+
+		currentTimer = null;
+	}
+
 	function addHours(date: Date, hours: number) {
 		return new Date(date.getTime() + hours * 60 * 60 * 1000);
 	}
@@ -101,11 +111,10 @@
 
 		currentTimer = null;
 	}
-	async function stopTimerWithHours(user: string, text: string, hours: number) {
-		const date = currentTimer.created_at;
+	async function stopTimerWithStartAndEndTime(user: string, text: string, startTime: string, endTime: string) {
 		const { data, error } = await $supabase
 			.from('timer')
-			.update({ user: user, chore: text, ended_at: addHours(date, hours) })
+			.insert({ user: user, chore: text, created_at: new Date(startTime), ended_at: new Date(endTime)})
 			.eq('id', currentTimer.id);
 
 		currentTimer = null;
@@ -115,6 +124,8 @@
 
 	let text;
 	let hours;
+	let startTime;
+	let endTime;
 </script>
 
 <div class="flex items-center justify-center w-full h-full relative">
@@ -129,12 +140,23 @@
 				<PreviousTimes user={$user} />
 			</div>
 			{#if currentTimer}
-				<div class="container flex flex-col gap-3">
-					<form on:submit|preventDefault={() => stopTimer($user, text)}>
+				<div class="container flex flex-col w-full max-w-5xl">
+					<form on:submit|preventDefault={() => {
+						if (startTime === undefined && endTime === undefined) {
+							stopTimer($user, text);
+						}
+						else {
+							stopTimerWithStartAndEndTime($user, text, startTime, endTime);
+						}
+
+						text = undefined;
+						startTime = undefined;
+						endTime = undefined;
+					}}>
 						<Clock
 							startTime={currentTimer.created_at}
 							endTime={now}
-							class="text-5xl font-bold text-center"
+							class="text-[15rem] pb-[7rem] font-bold text-center"
 						/>
 						<input
 							type="text"
@@ -142,15 +164,21 @@
 							bind:value={text}
 							placeholder="Was hast du gemacht?"
 						/>
-						<button class="btn variant-filled">Stop Timer</button>
-						<div class="grid grid-cols-2">
+						<label class="grid grid-cols-2 items-center mt-3">
+							Dauer
 							<input type="number" class="input p-2" bind:value={hours} />
-							<button
-								class="btn variant-filled"
-								on:click|preventDefault={() => stopTimerWithHours($user, text, hours)}
-								>Stop Timer</button
-							>
+						</label>
+						<div class="grid grid-cols-2 gap-3 mt-3">
+							<label class="grid grid-cols-2 items-center">
+								von
+								<input type="datetime-local" class="input p-2" bind:value={startTime} />
+							</label>
+							<label class="grid grid-cols-2 items-center">
+								bis
+								<input type="datetime-local" class="input p-2" bind:value={endTime} />
+							</label>
 						</div>
+						<button class="btn variant-filled w-full mt-3">Stop Timer</button>
 					</form>
 					<button class="btn error-filled" on:click={() => cancelTimer($user)}>Cancel Timer</button>
 				</div>
