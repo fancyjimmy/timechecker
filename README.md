@@ -1,38 +1,55 @@
-# create-svelte
+# TimeChecker Web App
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## Overview
 
-## Creating a project
+TimeChecker is a web application built with SvelteKit, Tailwind CSS, and Supabase. It allows users to log and track their activities, recording the time spent on each task.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Features
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+### Timer Functionality
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- The timer tracks activities in seconds.
+- Users can start and end the timer when they begin and finish their work.
 
-## Developing
+### History Page
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- The history page displays a log of activities.
+- Each entry includes timestamps, total time spent, and a user-provided description.
 
-```bash
-npm run dev
+### Entry Page
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- Users can manually input timestamps, hours, and a description for forgotten entries.
 
-## Building
+### User Authentication
 
-To create a production version of your app:
+- The app does not require user authentication.
+- Users are identified by a string name.
 
-```bash
-npm run build
-```
+## Getting Started
 
-You can preview the production build with `npm run preview`.
+To run the TimeChecker web app locally, follow these steps:
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+1. Clone the repository: `git clone https://github.com/your-username/timechecker.git`
+2. Navigate to the project directory: `cd timechecker`
+3. Install dependencies: `npm install`
+4. Run the development server: `npm run dev`
+
+Visit [https://timechecker-two.vercel.app](https://timechecker-two.vercel.app) in your browser to access the TimeChecker app.
+
+## Dependencies
+
+- [SvelteKit](https://kit.svelte.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Supabase](https://supabase.io/)
+
+## Contributing
+
+If you'd like to contribute to TimeChecker, please follow our [contribution guidelines](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Acknowledgments
+
+- Special thanks to the SvelteKit, Tailwind CSS, and Supabase communities for their excellent tools and support.
